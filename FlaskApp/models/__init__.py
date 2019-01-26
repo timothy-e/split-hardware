@@ -1,3 +1,3 @@
 from FlaskApp.app import db
 
-all = ["roommates", "purchases", "transfers"]
+all = ["roommates", "purchases", "ledgers"]
