@@ -10,7 +10,11 @@ db = SQLAlchemy(app)
 
 @app.route("/")
 def main():
-    return render_template('index.html')
+    return render_template('index.html', id=None)
+
+@app.route("/<id>")
+def page_with_id(id):
+    return render_template('index.html', id=id)
 
 if __name__ == "__main__":
     app.run(debug=True)
