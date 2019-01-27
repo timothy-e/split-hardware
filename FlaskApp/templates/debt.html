@@ -7,23 +7,50 @@
 </head>
 
 <body>
-    {% for member in home.members if member.roommate == identity %}
-    <h1>{{ member.roommate }}'s Summary</h1>
-    <table class="table table-bordered" style="width: 400px"> 
+    {% for member in home.members if member.name == identity %}
+    <h1>{{ member.name }}'s Summary</h1>
+    <table class="table table-bordered" style="width: 400px">
         <thead>
-        <tr>
-            <th scope="col"> Name</th>
-            <th scope="col">Amount</th>
-        </tr>
-        <tr>
-            {% for purchase in member.purchases %}
-            <td> {{ purchase.name }}</td>
-            <td> {{ purchase.amount }}</td>
+            <tr>
+                <th scope="col"> Name</th>
+                <th scope="col">Amount</th>
+            </tr>
+            {% for purchase in member.uncleared_purchases %}
+            <tr>
+                <td> {{ purchase.item }}</td>
+                <td> {{ purchase.pretty_amount }}</td>
+            </tr>
             {% endfor %}
-        </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+            {% for purchase in member.cleared_purchases %}
+            <tr>
+                <td> {{ purchase.item }}</td>
+                <td> {{ purchase.pretty_amount }}</td>
+            </tr>
+            {% endfor %}
+
         </thead>
     </table>
-    <h5>Total Amount: {{ member.get_owing(home.get_average()) }}</h5>
+    <h5>{{ member.pretty_owing(home.get_average()) }}</h5>
+    <table class="table table-bordered" style="width: 400px">
+        <thead>
+            <tr>
+                <th scope="col"> Name</th>
+                <th scope="col">Amount</th>
+            </tr>
+            {% for person, debt in home.get_owed(member.name).items() %}
+            <tr>
+                <td> {{ person }}</td>
+                <td> {{ debt }}</td>
+            </tr>
+            {% endfor %}
+
+        </thead>
+    </table>
     {% endfor %}
 </body>
+
 </html>
