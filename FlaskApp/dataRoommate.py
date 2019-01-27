@@ -15,6 +15,18 @@ class Roommate:
         for purchase in self.purchases:
             self.balance += purchase.amount
         return self.balance
+    
+    def set_to_zero(self):
+        self.balance = 0
+    
+    def get_owing(self, average):
+        owe = average - self.balance
+        if average - self.balance < 0:
+            print(f"Everyone owes {self.roommate} ${abs(owe)}")
+
+        else:
+            print(f"{self.roommate} owes everyone ${owe}")
+        return owe
 
 class House:
 
@@ -40,15 +52,6 @@ class Purchase:
     def __init__(self, name, amount):
         self.item = name
         self.amount = amount
-
-def get_owing(name, balance, average):
-    owe = average - balance
-    if average - balance < 0:
-        print(f"Everyone owes {name} ${abs(owe)}")
-
-    else:
-        print(f"{name} owes everyone ${owe}")
-    return {f"{name}":owe}
 
 def main():
     bread = Purchase("Bread", 20)

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+
+</head>
+
+<body>
+    {% for member in home.members if member.roommate == identity %}
+    <h1>{{ member.roommate }}'s Summary</h1>
+    <table class="table table-bordered" style="width: 400px"> 
+        <thead>
+        <tr>
+            <th scope="col"> Name</th>
+            <th scope="col">Amount</th>
+        </tr>
+        <tr>
+            {% for purchase in member.purchases %}
+            <td> {{ purchase.name }}</td>
+            <td> {{ purchase.amount }}</td>
+            {% endfor %}
+        </tr>
+        </thead>
+    </table>
+    <h5>Total Amount: {{ member.get_owing(home.get_average()) }}</h5>
+    {% endfor %}
+</body>
+</html>
