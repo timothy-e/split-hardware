@@ -51,6 +51,10 @@ class Roommate(Serializable):
             return f"The house hold owes {self.name} {pretty_owe}."
         else:
             return f"{self.name} owes the house hold {pretty_owe}."
+            
+    def get_ith_purchase(self, i):
+        if i < len(self.purchases):
+            return self.purchases[i]
 
 
 class House(Serializable):

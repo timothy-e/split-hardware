@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <title>R204 Overview</title>
+</head>
+
+<body>
+    <h1>
+        R204 Overview
+    </h1>
+    <table class="table table-bordered" style="width:100%">
+            <tr>
+              <th>Tim bot</th>
+              <th>Ev bot</th> 
+              <th>Emu bot</th>
+              <th>Tristan bot</th>
+            </tr>
+            {% for i in range(limit) %}
+            <tr>
+                {% for member in home.members %}
+                <td> {{ member.get_ith_purchases().name }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+          </table>
+
+</body>
+
+</html>

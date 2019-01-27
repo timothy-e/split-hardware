@@ -17,10 +17,12 @@ home.add_member(Tim)
 home.add_member(Tristan)
 home.add_member(Emmy)
 
+max_i = max(len(member.purchases) for member in home.members)
 
-@app.route("/")
-def main():
-    return render_template("index.html", id=None)
+
+@app.route("/", methods=["GET"])
+def overview():
+    return render_template("overview.html", home=home, limit = max_i)
 
 
 @app.route("/add_purchase/", methods=["POST"])  # pass in params by cURL: name, cost, item
@@ -49,7 +51,8 @@ def settle_debts():
 
 @app.route("/get_balance/<identity>", methods=["GET"])
 def get_balance(identity):
-    return render_template("debt.html", home=home, identity=identity)
+    return render_template("debt.html", home=home, identity=identity)  
+
 
 
 if __name__ == "__main__":
