@@ -18,6 +18,11 @@ class Roommate(Serializable):
         self.accumulate()
         return self.balance
 
+    def get_ith_purchase(self, i):
+        if i < len(self.purchases):
+            return self.purchases[i].item
+        return ""
+
     @property
     def cleared_purchases(self):
         return self.purchases[: self.cleared_index]
@@ -51,10 +56,6 @@ class Roommate(Serializable):
             return f"The house hold owes {self.name} {pretty_owe}."
         else:
             return f"{self.name} owes the house hold {pretty_owe}."
-            
-    def get_ith_purchase(self, i):
-        if i < len(self.purchases):
-            return self.purchases[i]
 
 
 class House(Serializable):

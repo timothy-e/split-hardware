@@ -12,15 +12,14 @@
     </h1>
     <table class="table table-bordered" style="width:100%">
             <tr>
-              <th>Tim bot</th>
-              <th>Ev bot</th> 
-              <th>Emu bot</th>
-              <th>Tristan bot</th>
+            {% for member in home.members %}
+                <th> {{ member.name}}</th>
+            {% endfor %}
             </tr>
             {% for i in range(limit) %}
             <tr>
                 {% for member in home.members %}
-                <td> {{ member.get_ith_purchases().name }}</td>
+                <td> {{ member.get_ith_purchase(i) }}</td>
                 {% endfor %}
             </tr>
             {% endfor %}
