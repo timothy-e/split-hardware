@@ -5,7 +5,7 @@ class Roommate:
         self.purchases = []
         self.balance = 0
 
-    def addItem(self, item):
+    def add_item(self, item):
         self.purchases.append(item)
         self.accumulate()
         return self.balance
@@ -22,18 +22,18 @@ class House:
         self.unit = name
         self.members = []
 
-    def addMember(self, item):
+    def add_member(self, item):
         self.members.append(item)
 
-    def getTotalAmount(self):
+    def get_total_amount(self):
         total = 0
         for member in self.members:
             total += member.accumulate()
 
         return total
 
-    def getAverage(self):
-        return self.getTotalAmount()/len(self.members)
+    def get_average(self):
+        return self.get_total_amount()/len(self.members)
 
 class Purchase:
 
@@ -41,12 +41,14 @@ class Purchase:
         self.item = name
         self.amount = amount
 
-def getOwing(name, balance, average):
+def get_owing(name, balance, average):
     owe = average - balance
     if average - balance < 0:
         print(f"Everyone owes {name} ${abs(owe)}")
+
     else:
         print(f"{name} owes everyone ${owe}")
+    return {f"{name}":owe}
 
 def main():
     bread = Purchase("Bread", 20)
@@ -59,27 +61,27 @@ def main():
     Emmy = Roommate("Emmy bot")
 
     print("Each member's spending:")
-    print(Evan.addItem(bread))
-    print(Evan.addItem(toiletPaper))
-    print(Tristan.addItem(rice))
-    print(Emmy.addItem(toiletPaper))
-    print(Tim.addItem(bread))
+    print(Evan.add_item(bread))
+    print(Evan.add_item(toiletPaper))
+    print(Tristan.add_item(rice))
+    print(Emmy.add_item(toiletPaper))
+    print(Tim.add_item(bread))
 
     home = House("R204")
-    home.addMember(Evan)
-    home.addMember(Tim)
-    home.addMember(Tristan)
-    home.addMember(Emmy)
+    home.add_member(Evan)
+    home.add_member(Tim)
+    home.add_member(Tristan)
+    home.add_member(Emmy)
 
     total = 0
-    for count in range(len(home.members)):
-        total += home.members[count].accumulate()
-    print(home.getAverage())
+    for members in home.members:
+        total += members.accumulate()
+    print(home.get_average())
 
-    getOwing("Evan", Evan.balance, home.getAverage())
-    getOwing("Emmy", Emmy.balance, home.getAverage())
-    getOwing("Tim", Tim.balance, home.getAverage())
-    getOwing("Tristan", Tristan.balance, home.getAverage())
+    get_owing("Evan", Evan.balance, home.get_average())
+    get_owing("Emmy", Emmy.balance, home.get_average())
+    get_owing("Tim", Tim.balance, home.get_average())
+    get_owing("Tristan", Tristan.balance, home.get_average())
 
 if __name__ == "__main__":
     main()
