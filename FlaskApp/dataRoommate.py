@@ -53,9 +53,9 @@ class Roommate(Serializable):
         owe = self.get_owing(average)
         pretty_owe = f"${abs(owe):0.02f}"
         if owe <= 0:
-            return f"The house hold owes {self.name} {pretty_owe}."
+            return f"The household owes {self.name} {pretty_owe}."
         else:
-            return f"{self.name} owes the house hold {pretty_owe}."
+            return f"{self.name} owes the household {pretty_owe}."
 
 
 class House(Serializable):
