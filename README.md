@@ -1,4 +1,4 @@
-# split-hardware
+# Split
 
 We're developing an Alexa based cost sharing app for roommates to split the cost of shared items.
 
@@ -7,19 +7,10 @@ We're developing an Alexa based cost sharing app for roommates to split the cost
 
 Navigate to `localhost:5000` and check it out.
 
-Currently I have a simple template set up. Try going to `localhost:5000/some_string`.
+## Information
 
-Because the app is running in debug mode, updating the Python code will trigger a rebuild, so you don't need to manually restart the Flask process.
+We configured an Alexa Skill to send commands to an AWS Lambda function. The function sends cURL requests to access our webserver built with Flask over a Postgres DB. 
 
 [To create a deployment package for AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/lambda-python-how-to-create-deployment-package.html)
 
 [To review Alexa + Lambda set up](https://medium.com/crowdbotics/how-to-build-a-custom-amazon-alexa-skill-step-by-step-my-favorite-chess-player-dcc0edae53fb)
-
-Things to do:
-* Configure Alexa commands
-  * Create endpoints with AWS Lambda for the Alexa commands
-* Configure a webserver
-  * Docker? :grimacing:
-  * Flask
-  * REST APIs
-* Connect our webserver with our Lambda functions
