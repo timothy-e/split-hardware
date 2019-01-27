@@ -3,11 +3,13 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 
 app = Flask(__name__)
-engine = create_engine('sqlite://')
-app.config['SQLALCHEMY_DATABASE_URI'] = engine.url
+engine = create_engine("postgresql://usr:pass@localhost/splitdb")
+app.config["SQLALCHEMY_DATABASE_URI"] = engine.url
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
+db.create_all()
+
 
 @app.route("/")
 def main():
