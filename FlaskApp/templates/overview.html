@@ -4,26 +4,48 @@
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <title>R204 Overview</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        table.center {
+            margin-left:auto; 
+            margin-right:auto;
+        }
+        div.top {
+            background: orange;
+            width: 100%;
+            height: 220px;
+        }
+        h1 {
+            margin: auto;
+            color: white;
+            margin-top: 100px;
+        }
+    
+    </style>
 </head>
 
 <body>
-    <h1>
-        R204 Overview
-    </h1>
-    <table class="table table-bordered" style="width:100%">
-            <tr>
+    <div class="d-inline-block bg-warning top">
+        <h1>R204 Overview</h1>
+    </div>
+    <br><br>
+    <table class="table table-bordered center" style="width:80%">
+        <tr>
+        {% for member in home.members %}
+            <th> {{ member.name}}</th>
+        {% endfor %}
+        </tr>
+        {% for i in range(limit) %}
+        <tr>
             {% for member in home.members %}
-                <th> {{ member.name}}</th>
+            <td> {{ member.get_ith_purchase(i) }}</td>
             {% endfor %}
-            </tr>
-            {% for i in range(limit) %}
-            <tr>
-                {% for member in home.members %}
-                <td> {{ member.get_ith_purchase(i) }}</td>
-                {% endfor %}
-            </tr>
-            {% endfor %}
-          </table>
+        </tr>
+        {% endfor %}
+    </table>
 
 </body>
 

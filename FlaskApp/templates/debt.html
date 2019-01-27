@@ -3,16 +3,38 @@
 
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-
+    <style>
+        h1, h5 {
+            text-align: center;
+        }
+        table.center {
+            margin-left:auto; 
+            margin-right:auto;
+        }
+        div.top {
+            background: orange;
+            width: 100%;
+            height: 220px;
+        }
+        h1 {
+            margin: auto;
+            color: white;
+            margin-top: 100px;
+        }
+    </style>
 </head>
 
 <body>
     {% for member in home.members if member.name == identity %}
-    <h1>{{ member.name }}'s Summary</h1>
-    <table class="table table-bordered" style="width: 400px">
+    <div class="d-inline-block bg-warning top">
+        <h1>{{ member.name }}'s Summary</h1>
+    </div>
+    <br><br>
+    <h5> Here is a list of the items that you have purchased recently. </h5>
+    <table class="table table-bordered center" style="width: 400px">
         <thead>
             <tr>
-                <th scope="col"> Name</th>
+                <th scope="col"> Item </th>
                 <th scope="col">Amount</th>
             </tr>
             {% for purchase in member.uncleared_purchases %}
@@ -34,8 +56,9 @@
 
         </thead>
     </table>
+    <br><br>
     <h5>{{ member.pretty_owing(home.get_average()) }}</h5>
-    <table class="table table-bordered" style="width: 400px">
+    <table class="table table-bordered center" style="width: 400px">
         <thead>
             <tr>
                 <th scope="col"> Name</th>
