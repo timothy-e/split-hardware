@@ -59,15 +59,16 @@ def log_purchases(event):
     name = event['request']['intent']['slots']['name']['value']
     amount = event['request']['intent']['slots']['amount']['value']
     amountTwo = event['request']['intent']['slots']['amountTwo']['value']
-    amountCents = amount*100 + amountTwo
+    amountCents = int(amount) + int(amountTwo)/100
     
-    theMSG = f"{name} has logged {item}. It cost {amount} dollars and {amountTwo} cents"
+    theMSG = "{} has logged {}. They spent {} dollars and {} cents.".format(name, item, amount, amountTwo)
     reprompt_MSG = "Would you like to log purchases?"
-    card_TEXT = name + ", you've logged " + item 
+    card_TEXT = name + ", you've logged " + item +  str(amountCents)
     card_TITLE = name + ", you've logged " + item 
     
     #Post Request for the three parameters for a purchased item
-    r = requests.post('http://split2.jcuj7prtgb.us-east-2.elasticbeanstalk.com/add_purchase', data = {'name':name,'cost':amountCents,'item':item})
+    path = "?name={}&cost={}&item={}".format(name, str(amountCents), item.replace(" ", "%20"))
+    r = requests.post('http://167.99.186.234:5000/add_purchase/' + path)
     
     return output_json_builder_with_reprompt_and_card(theMSG, card_TEXT, card_TITLE, reprompt_MSG, False)
     
@@ -77,9 +78,10 @@ def amount_owed(event):
     name = event['request']['intent']['slots']['name']['value']
     
     #Get Request to retrieve what the {name} owes and how much
-    r = requests.get('http://split2.jcuj7prtgb.us-east-2.elasticbeanstalk.com/get_balance', params = {'name':name})
+    path = "?name={}".format(name)
+    r = requests.get('http://167.99.186.234:5000/get_balance'+path)
     
-    theMSG = f"Balances Displayed for {name}"
+    theMSG = "Balances Displayed for {}".format(name)
     reprompt_MSG = "Would you like to know who you owe funds?"
     card_TEXT = "Outstanding balances displayed"
     card_TITLE = "Outstanding balances displayed" 
@@ -90,7 +92,7 @@ def amount_owed(event):
 def settle_balance(event):
     
     #Post Request for settling all debts
-    r = requests.put('http://split2.jcuj7prtgb.us-east-2.elasticbeanstalk.com/settle_debts')
+    r = requests.put('http://167.99.186.234:5000/settle_debts')
     
     theMSG = "All balances have been settled"
     reprompt_MSG = "Would you like to settle balances?"
