@@ -1,22 +1,22 @@
-class Roommate(object):
+class Roommate:
 
     def __init__(self, name):
         self.roommate = name
-        self.purchase = []
+        self.purchases = []
         self.balance = 0
 
     def addItem(self, item):
-        self.purchase.append(item)
+        self.purchases.append(item)
         self.accumulate()
         return self.balance
 
     def accumulate(self):
         self.balance = 0
-        for count in range(len(self.purchase)):
-            self.balance += self.purchase[count].amount
+        for purchase in self.purchases:
+            self.balance += purchase.amount
         return self.balance
 
-class House(Roommate):
+class House:
 
     def __init__(self, name):
         self.unit = name
@@ -27,14 +27,15 @@ class House(Roommate):
 
     def getTotalAmount(self):
         total = 0
-        for count in range(len(self.members)):
-            total += self.members[count].accumulate()
+        for member in self.members:
+            total += member.accumulate()
+
         return total
 
     def getAverage(self):
         return self.getTotalAmount()/len(self.members)
 
-class Purchase(object):
+class Purchase:
 
     def __init__(self, name, amount):
         self.item = name
@@ -80,4 +81,5 @@ def main():
     getOwing("Tim", Tim.balance, home.getAverage())
     getOwing("Tristan", Tristan.balance, home.getAverage())
 
-main()
+if __name__ == "__main__":
+    main()
