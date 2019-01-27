@@ -9,7 +9,7 @@ Navigate to `localhost:5000` and check it out.
 
 ## Information
 
-We configured an Alexa Skill to send commands to an AWS Lambda function. The function sends cURL requests to access our webserver built with Flask over a Postgres DB. 
+We configured an Alexa Skill to send commands to an AWS Lambda function. The function sends cURL requests to access our webserver built with Flask over ~~a Postgres DB~~ some Python classes.
 
 [To create a deployment package for AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/lambda-python-how-to-create-deployment-package.html)
 
